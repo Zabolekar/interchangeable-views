@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+   <button type="button">--- 0 ---</button>
+   <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
+   <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
+   <script type="text/javascript">
+      $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+   </script>
+</body>
+</html>
