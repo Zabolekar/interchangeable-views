@@ -6,11 +6,12 @@ class SingleInheritance(type):
    A metaclass for disallowing multiple inheritance.
    """
    @classmethod
-   def __prepare__(metacls, name, bases, *kwds):
+   def __prepare__(mcs, name, bases, *kwds):
       if len(bases) <= 1:
          return dict()
       else:
-         raise RuntimeError(f"{name} inherits from multiple classes but at least one of them only supports single inheritance")
+         raise RuntimeError(f"{name} inherits from multiple classes, "
+                            "but at least one of them only supports single inheritance")
 
 def informs(f):
    """

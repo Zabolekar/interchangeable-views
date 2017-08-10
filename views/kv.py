@@ -1,5 +1,3 @@
-from ..helpers.mvc import View
-
 import kivy
 kivy.require('1.9.1')
 
@@ -10,6 +8,8 @@ Config.set('graphics', 'height', '200')
 
 from kivy.app import App
 from kivy.uix.button import Button
+
+from ..helpers.mvc import View
 
 class MyApp(App):
    def build(self):

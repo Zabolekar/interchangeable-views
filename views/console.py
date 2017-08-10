@@ -1,6 +1,5 @@
-from ..helpers.mvc import View
-
 import colorama as cr
+from ..helpers.mvc import View
 
 class ConsoleView(View):
    def __init__(self, dispatch_event):
