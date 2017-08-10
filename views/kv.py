@@ -1,13 +1,15 @@
 from ..helpers.mvc import View
 
 import kivy
-from kivy.app import App
-from kivy.uix.button import Button
-from kivy.config import Config
-
 kivy.require('1.9.1')
+
+from kivy.config import Config
+Config.set('kivy', 'log_level', 'critical')
 Config.set('graphics', 'width', '200')
 Config.set('graphics', 'height', '200')
+
+from kivy.app import App
+from kivy.uix.button import Button
 
 class MyApp(App):
    def build(self):
