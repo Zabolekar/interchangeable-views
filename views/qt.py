@@ -16,11 +16,11 @@ def button_set_HTML(button, html):
    button.setIcon(pixmap)
 
 class QtView(View):
-   def __init__(self, command):
+   def __init__(self, dispatch_event):
       print("initializing QtView")
       self.app = QApplication(sys.argv)
       self.but = QPushButton()
-      self.but.clicked.connect(command)
+      self.but.clicked.connect(lambda: dispatch_event("increment"))
       self.but.show()
    def inform(self, model):
       m, n = model.n//5, model.n % 5

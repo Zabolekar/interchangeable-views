@@ -3,11 +3,11 @@ from ..helpers.mvc import View
 import colorama as cr
 
 class ConsoleView(View):
-   def __init__(self, command):
+   def __init__(self, dispatch_event):
       cr.init()
       print(cr.Style.BRIGHT + "initializing ConsoleView" + cr.Style.RESET_ALL)
       self._n = None
-      self.command = command
+      self.dispatch_event = dispatch_event
       print(self)
    def __repr__(self):
       return cr.Fore.GREEN + cr.Style.BRIGHT + f"n = {self._n}" + cr.Style.RESET_ALL
@@ -22,7 +22,7 @@ class ConsoleView(View):
          except (KeyboardInterrupt, EOFError):
             break
          if command == "i":
-            self.command()
+            self.dispatch_event("increment")
          elif command == "q":
             break
          elif command == "":

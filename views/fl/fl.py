@@ -10,10 +10,10 @@ _command: Callable[[], None]
 _text: str
 
 class FlaskView(View):
-   def __init__(self, command):
+   def __init__(self, dispatch_event):
       print("initializing FlaskView")
-      global _command
-      _command = command
+      global _dispatch_event
+      _dispatch_event = dispatch_event
    def inform(self, model):
       global _text
       _text = f"--- {model.n} ---"
@@ -31,7 +31,7 @@ def index():
 
 @app.route("/on_click")
 def on_click():
-   _command()
+   _dispatch_event("increment")
    return _text
 
 @app.route('/stream')

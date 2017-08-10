@@ -3,5 +3,8 @@ from .my_model import MyModel
 
 class MyController(Controller):
    _model_class = MyModel
-   def push_button(self):
-      self._model.inc()
+   def dispatch_event(self, event):
+      if event == "increment":
+         self._model.inc()
+      else:
+         print(f"Warning: unknown event {event}")

@@ -10,11 +10,11 @@ def convert(n, to):
    return "".join(to[int(i)] for i in str(n))
 
 class TkView(View):
-   def __init__(self, command):
+   def __init__(self, dispatch_event):
       print("initializing TkView")
       self.root = Tk()
-      self.but = Button(self.root, command=command)
-      self.but2 = Button(self.root, command=command)
+      self.but = Button(self.root, command=lambda: dispatch_event("increment"))
+      self.but2 = Button(self.root, command=lambda: dispatch_event("increment"))
 
       self.scale = Scale(self.root, from_=0, to=99, showvalue=False,
                          state="disabled", orient="horizontal",

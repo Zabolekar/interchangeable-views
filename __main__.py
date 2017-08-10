@@ -30,7 +30,7 @@ if __name__ == '__main__':
       from .views.tk import TkView as MainView
       def kv():
          from .views.kv import KivyView as View
-         v = View(command=c.push_button)
+         v = View(c.dispatch_event)
          c.model_subscribe(v)
          v.mainloop()
       Thread(target=kv, args=()).start()
@@ -43,8 +43,8 @@ if __name__ == '__main__':
       quit()
    
    if view not in ["console", "curses"]:
-      c.model_subscribe(ConsoleView(c.push_button))
+      c.model_subscribe(ConsoleView(c.dispatch_event))
    
-   v = MainView(command=c.push_button)
+   v = MainView(c.dispatch_event)
    c.model_subscribe(v)
    v.mainloop()

@@ -15,12 +15,12 @@ class MyApp(App):
       return self.but
 
 class KivyView(View):
-   def __init__(self, command):
+   def __init__(self, dispatch_event):
       print("Initializing KivyView")
       self.app = MyApp()
       self.app.but = Button()
-      self.app.but.bind(on_press=lambda _: command())
-      self.app.but.bind(on_release=lambda _: command())
+      self.app.but.bind(on_press=lambda _: dispatch_event("increment"))
+      self.app.but.bind(on_release=lambda _: dispatch_event("increment"))
    def inform(self, model):
       self.app.but.text = str(model.n)
       self.app.but.font_size = model.n+5

@@ -25,7 +25,7 @@ def informs(f):
       return result
    return wrapper
 
-class Model(metaclass=SingleInheritance):
+class Model(metaclass=SingleInheritance): # TODO: why did I need it to be SingleInheritance?
    def __init__(self):
       self.observers = []
    def subscribe(self, view):
@@ -41,8 +41,11 @@ class View(ABC):
    def mainloop(self):
       pass
 
-class Controller(metaclass=SingleInheritance):
+class Controller(ABC):
    def __init__(self):
       self._model = self._model_class()
    def model_subscribe(self, view):
       self._model.subscribe(view)
+   @abstractmethod
+   def dispatch_event(self, event):
+      pass

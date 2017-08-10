@@ -3,8 +3,8 @@ from ..helpers.mvc import View
 import curses
 
 class CursesView(View):
-   def __init__(self, command):
-      self.command = command
+   def __init__(self, dispatch_event):
+      self.dispatch_event = dispatch_event
       self.win = None
       self.screen = None
    def inform(self, model):
@@ -43,4 +43,4 @@ class CursesView(View):
          if event == ord('q'):
             break
          elif event == ord('i'):
-            self.command()
+            self.dispatch_event("increment")
