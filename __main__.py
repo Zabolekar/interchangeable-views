@@ -1,7 +1,7 @@
 from sys import argv
 
-from helpers.my_controller import MyController
-from views.console import ConsoleView
+from .helpers.my_controller import MyController
+from .views.console import ConsoleView
 
 if __name__ == '__main__':
    c = MyController()
@@ -16,15 +16,15 @@ if __name__ == '__main__':
    if view == "console":
       MainView = ConsoleView
    elif view == "curses":
-      from views.curses import CursesView as MainView
+      from .views.curses import CursesView as MainView
    elif view == "tk":
-      from views.tk import TkView as MainView
+      from .views.tk import TkView as MainView
    elif view == "qt":
-      from views.qt import QtView as MainView
+      from .views.qt import QtView as MainView
    elif view == "kivy":
-      from views.kv import KivyView as MainView
+      from .views.kv import KivyView as MainView
    elif view == "flask":
-      from views.fl.fl import FlaskView as MainView
+      from .views.fl.fl import FlaskView as MainView
    else:
       print(f"Unknown view: {view}")
       quit()

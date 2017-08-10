@@ -1,4 +1,4 @@
-from helpers.mvc import View
+from ..helpers.mvc import View
 
 import kivy
 from kivy.app import App

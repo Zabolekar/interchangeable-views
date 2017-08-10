@@ -1,4 +1,4 @@
-from helpers.mvc import View
+from ..helpers.mvc import View
 
 from tkinter import Tk, Button, Scale, Label
 

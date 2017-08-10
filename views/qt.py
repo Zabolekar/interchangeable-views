@@ -1,4 +1,4 @@
-from helpers.mvc import View
+from ..helpers.mvc import View
 
 import sys
 from PySide.QtGui import QApplication, QPushButton, QTextDocument, QPixmap, QPainter, QColor
