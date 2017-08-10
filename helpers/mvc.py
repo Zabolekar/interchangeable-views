@@ -27,15 +27,20 @@ def informs(f):
    return wrapper
 
 class Model(metaclass=SingleInheritance): # TODO: why did I need it to be SingleInheritance?
+   """
+   0. Your model should inherit from Model.
+   1. Your model should have a class attribute _inform_about, which is a sequence (usually a tuple) of field names.
+   If you want to mutate it, it can be an instance attribute and a list of field names.
+   Alternatively, you can override current_data, because it is the only method that uses _inform_about.
+   2. Decorate with @informs any public method that changes your model or calls methods that change you model
+   3. Last but not least, don't forget to call super().__init__() somewhere in your model's __init__()
+   """
    def __init__(self):
       self.observers = []
    def subscribe(self, view):
       print(f"subscribing {view.__class__.__name__} to the model")
       self.observers.append(view)
-      try:
-         data = self.current_data()
-      except AttributeError:
-         raise AttributeError("every Model subclass should have a class attribute _inform_about, which is a tuple of field names. Or it can be an instance attribute and a list of field names. Alternatively, you can override current_data")
+      data = self.current_data()
       view.inform(data)
    def current_data(self):
       return {name: getattr(self, name) for name in self._inform_about}
