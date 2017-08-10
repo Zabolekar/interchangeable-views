@@ -21,8 +21,9 @@ class KivyView(View):
       self.app.but = Button()
       self.app.but.bind(on_press=lambda _: dispatch_event("increment"))
       self.app.but.bind(on_release=lambda _: dispatch_event("increment"))
-   def inform(self, model):
-      self.app.but.text = str(model.n)
-      self.app.but.font_size = model.n+5
+   def inform(self, model_data):
+      n = model_data["n"]
+      self.app.but.text = str(n)
+      self.app.but.font_size = n+5
    def mainloop(self):
       self.app.run()

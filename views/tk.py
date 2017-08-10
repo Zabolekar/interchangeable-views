@@ -27,20 +27,22 @@ class TkView(View):
       self.but2.grid(row=0, column=2)
       self.lab.grid(row=1, column=0, columnspan=3)
 
-   def inform(self, model):
-      self.root.title(str(model.n))
+   def inform(self, model_data):
+      n = model_data["n"]
+      
+      self.root.title(str(n))
    
-      self.but["text"] = f"{model.n:08b}"
+      self.but["text"] = f"{n:08b}"
       
       self.scale["state"] = "active"
-      self.scale.set(model.n % 100)
+      self.scale.set(n % 100)
       self.scale["state"] = "disabled"
       
-      self.but2["text"] = f"{model.n:#04x}"
+      self.but2["text"] = f"{n:#04x}"
       
-      ar = convert(model.n, arabic)
-      hi = convert(model.n, devanagari)
-      ti = convert(model.n, tibetan)
+      ar = convert(n, arabic)
+      hi = convert(n, devanagari)
+      ti = convert(n, tibetan)
       self.lab["text"] = f"{ar}   {hi}   {ti}"
    def mainloop(self):
       self.root.mainloop()

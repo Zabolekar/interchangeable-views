@@ -7,15 +7,16 @@ class CursesView(View):
       self.dispatch_event = dispatch_event
       self.win = None
       self.screen = None
-   def inform(self, model):
+   def inform(self, model_data):
+      n = model_data["n"]
       if self.win:
-         label = f"n = {model.n}"
+         label = f"n = {n}"
          self.win.addstr(1, 16-len(label)//2, label)
       if self.screen:
          arr = [' ']*5
-         arr[(-model.n+1)%5] = '<'
-         arr[(-model.n)%5] = '~'
-         arr[(-model.n-1)%5] = '>'
+         arr[(-n+1)%5] = '<'
+         arr[(-n)%5] = '~'
+         arr[(-n-1)%5] = '>'
          pattern = "".join(arr)
          self.screen.addstr(0, 0, pattern*(self.width//len(pattern)))
    def mainloop(self):

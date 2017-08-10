@@ -11,8 +11,8 @@ class ConsoleView(View):
       print(self)
    def __repr__(self):
       return cr.Fore.GREEN + cr.Style.BRIGHT + f"n = {self._n}" + cr.Style.RESET_ALL
-   def inform(self, model):
-      self._n = model.n
+   def inform(self, model_data):
+      self._n = model_data["n"]
       print(self)
    def mainloop(self):
       print(cr.Style.BRIGHT + "Use 'i' to increment the counter, 'q' to quit:" + cr.Style.RESET_ALL)

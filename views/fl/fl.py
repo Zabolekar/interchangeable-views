@@ -14,9 +14,9 @@ class FlaskView(View):
       print("initializing FlaskView")
       global _dispatch_event
       _dispatch_event = dispatch_event
-   def inform(self, model):
+   def inform(self, model_data):
       global _text
-      _text = f"--- {model.n} ---"
+      _text = f"--- {model_data['n']} ---"
       # DO YOU SEE THE BUG HERE? We only change the text variable, not the page
       # The whole construction only works because the page changes itself on every button press
       # And also because there is a stream that the page reads every second

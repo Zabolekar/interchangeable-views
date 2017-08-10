@@ -20,8 +20,9 @@ def informs(f):
    @wraps(f)
    def wrapper(self, *args, **kwargs):
       result = f(self, *args, **kwargs)
+      data = self.current_data()
       for view in self.observers:
-         view.inform(self)
+         view.inform(data)
       return result
    return wrapper
 
@@ -31,11 +32,17 @@ class Model(metaclass=SingleInheritance): # TODO: why did I need it to be Single
    def subscribe(self, view):
       print(f"subscribing {view.__class__.__name__} to the model")
       self.observers.append(view)
-      view.inform(self)
+      try:
+         data = self.current_data()
+      except AttributeError:
+         raise AttributeError("every Model subclass should have a class attribute _inform_about, which is a tuple of field names. Or it can be an instance attribute and a list of field names. Alternatively, you can override current_data")
+      view.inform(data)
+   def current_data(self):
+      return {name: getattr(self, name) for name in self._inform_about}
 
 class View(ABC):
    @abstractmethod
-   def inform(self, model):
+   def inform(self, model_data):
       pass
    @abstractmethod
    def mainloop(self):
