@@ -24,7 +24,7 @@ if __name__ == '__main__':
       from .views.qt import QtView as MainView
    elif view_name == "kivy":
       # don't move it to the top of the file:
-      # importing kivyl writes stuff to console even if you set log_level='critical'
+      # importing kivy writes stuff to console even if you set log_level='critical'
       # so only import it if you need it
       from .views.kv import KivyView as MainView
    elif view_name == "flask":
