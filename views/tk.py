@@ -1,9 +1,13 @@
-from tkinter import Tk, Button, Scale, Label
+from tkinter import Tk
+from tkinter import Button, Scale, Label
 from ..helpers.mvc import View
 
 ARABIC = "٠١٢٣٤٥٦٧٨٩"
 DEVANAGARI = "०१२३४५६७८९"
 TIBETAN = "༠༡༢༣༤༥༦༧༨༩"
+BENGALI = "০১২৩৪৫৬৭৮৯"
+KHMER = "០១២៣៤៥៦៧៨៩"
+KANNADA = "೦೧೨೩೪೫೬೭೮೯"
 
 def convert(n, to):
    return "".join(to[int(i)] for i in str(n))
@@ -18,8 +22,8 @@ class TkView(View):
       self.scale = Scale(self.root, from_=0, to=99, showvalue=False,
                          state="disabled", orient="horizontal",
                          length=200, sliderlength=20, relief="sunken")
-
-      self.lab = Label(self.root, font=("Courier", 20))
+      
+      self.lab = Label(self.root, font=("Helvetica", 20))
 
       self.but.grid(row=0, column=0)
       self.scale.grid(row=0, column=1)
@@ -42,6 +46,10 @@ class TkView(View):
       ar = convert(n, ARABIC)
       hi = convert(n, DEVANAGARI)
       ti = convert(n, TIBETAN)
-      self.lab["text"] = f"{ar}   {hi}   {ti}"
+      be = convert(n, BENGALI)
+      kh = convert(n, KHMER)
+      ka = convert(n, KANNADA)
+      
+      self.lab["text"] = f"{ar}   {hi}   {ti}\n{be}   {kh}   {ka}"
    def mainloop(self):
       self.root.mainloop()
