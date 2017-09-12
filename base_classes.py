@@ -15,7 +15,7 @@ class SingleInheritance(type):
 
 def informs(f):
    """
-   A decorator forcing the method to inform the observers.
+   A decorator forcing the method to inform the controller.
    Should be used in a Model subclass.
    """
    @wraps(f)

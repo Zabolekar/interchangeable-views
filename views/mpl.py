@@ -1,3 +1,5 @@
+from time import monotonic
+
 import numpy as np
 import matplotlib
 matplotlib.use("TkAgg")
@@ -11,8 +13,9 @@ class MatplotlibView(View):
       print("initializing MatplotlibView")
       self.figure = plt.figure()
       self.ax = self.figure.add_subplot(111)
-      self.ax.set_xlabel("Number of .inc() invocations")
+      self.ax.set_xlabel("Time")
       self.ax.set_ylabel("Value of n")
+      self.timestamps = []
       self.series = []
       self.line, = self.ax.plot(np.array([]), "ko-")
       self.but = wid.Button(self.ax, "")
@@ -21,8 +24,9 @@ class MatplotlibView(View):
       self.figure.canvas.mpl_connect("close_event", lambda _: dispatch_event("quit"))
    def inform(self, model_data):
       n = model_data["n"]
+      self.timestamps.append(monotonic())
       self.series.append(n)
-      x, y = np.arange(len(self.series)), np.array(self.series)
+      x, y = np.array(self.timestamps), np.array(self.series)
       self.line.set_data(x, y)
       self.ax.relim()
       self.ax.autoscale_view()

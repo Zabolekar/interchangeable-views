@@ -7,6 +7,7 @@ from .views.console import ConsoleView
 # for example, importing kivy writes stuff to console even if you set log_level='critical'
 # and importing matplotlib takes some time
 
+# TODO: curses view really doesn't work well with R model
 # TODO: if Flask is being launched in a separate thread,
 # it still somehow manages to block the program
 # TODO: for reasons I don't quite understand,
