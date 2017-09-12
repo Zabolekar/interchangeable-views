@@ -1,8 +1,6 @@
-from .mvc import Controller
-from .my_r_model import MyRModel
+from .helpers.mvc import Controller
 
-class MyRController(Controller):
-   _model_class = MyRModel
+class MyController(Controller):
    def dispatch_event(self, event):
       if event == "increment":
          self._model.inc()

@@ -1,5 +1,5 @@
 from rpy2.robjects import r
-from .mvc import Model, informs
+from ..helpers.mvc import Model, informs
 
 R_CODE = """
 n <- 0

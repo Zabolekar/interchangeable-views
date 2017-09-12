@@ -15,6 +15,7 @@ def convert(n, to):
 class TkView(View):
    def __init__(self, dispatch_event):
       print("initializing TkView")
+      self.dispatch_event = dispatch_event
       self.root = Tk()
       self.but = Button(self.root, command=lambda: dispatch_event("increment"))
       self.but2 = Button(self.root, command=lambda: dispatch_event("increment"))
@@ -29,6 +30,15 @@ class TkView(View):
       self.scale.grid(row=0, column=1)
       self.but2.grid(row=0, column=2)
       self.lab.grid(row=1, column=0, columnspan=3)
+      
+      self.root.protocol("WM_DELETE_WINDOW", self.on_delete_window)
+      
+   def on_delete_window(self):
+      self.dispatch_event("quit")
+      self.close()
+      
+   def close(self):
+      self.root.destroy()
 
    def inform(self, model_data):
       n = model_data["n"]

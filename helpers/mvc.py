@@ -55,8 +55,8 @@ class View(ABC):
       pass
 
 class Controller(ABC):
-   def __init__(self):
-      self._model = self._model_class()
+   def __init__(self, model_class):
+      self._model = model_class()
    def model_subscribe(self, view):
       self._model.subscribe(view)
    @abstractmethod

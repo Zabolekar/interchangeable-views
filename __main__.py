@@ -7,6 +7,7 @@ from .views.console import ConsoleView
 # for example, importing kivy writes stuff to console even if you set log_level='critical'
 # and importing matplotlib takes some time
 
+# TODO: place all the models into a separate models folder, and maybe untie model and controller classes, because currently we have two controllers whose code is identical
 # TODO: if Flask is being launched in a separate thread,
 # it still somehow manages to block the program
 # TODO: for reasons I don't quite understand,
@@ -16,23 +17,28 @@ from .views.console import ConsoleView
 # TODO: for whatever reason matplotlib is unresponsive when called with qt-matplotlib
 # changind the backend to Qt4Agg doesn't fix it ("A QApplication instance already exists")
 # TODO: tk-matplotlib backends behaves really ugly if one of the windows has been closed
+# Solution: every view should send a "quit" message on being closed, controller should be able to handle it. So every view should
+# additionally have a .close() method? And who should call it, model or controller? And where should we really place the views list, in the model or in the controller? Think about it
+# the controller should probably also be able to unsubscribe a view when the view requests it. How would I implement it?
+
+from .my_controller import MyController
 
 if __name__ == '__main__':
    try:
       model_name = argv[1]
       if model_name == "my-model":
-         from .helpers.my_controller import MyController
+         from .models.my_model import MyModel as model_class
       elif model_name == "my-r-model":
-         from .helpers.my_r_controller import MyRController as MyController
+         from .models.my_r_model import MyRModel as model_class
       else:
          print(f"Unknown model: {model_name}")
          quit()
    except IndexError:
       print("You haven't selected any model")
       print("Default is my-model. Others are: my-r-model")
-      from .helpers.my_controller import MyController
+      from .models.my_model import MyModel as model_class
 
-   controller = MyController()
+   controller = MyController(model_class)
 
    try:
       view_name = argv[2]
