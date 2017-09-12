@@ -7,7 +7,6 @@ from .views.console import ConsoleView
 # for example, importing kivy writes stuff to console even if you set log_level='critical'
 # and importing matplotlib takes some time
 
-# TODO: place all the models into a separate models folder, and maybe untie model and controller classes, because currently we have two controllers whose code is identical
 # TODO: if Flask is being launched in a separate thread,
 # it still somehow manages to block the program
 # TODO: for reasons I don't quite understand,
@@ -18,8 +17,8 @@ from .views.console import ConsoleView
 # changind the backend to Qt4Agg doesn't fix it ("A QApplication instance already exists")
 # TODO: tk-matplotlib backends behaves really ugly if one of the windows has been closed
 # Solution: every view should send a "quit" message on being closed, controller should be able to handle it. So every view should
-# additionally have a .close() method? And who should call it, model or controller? And where should we really place the views list, in the model or in the controller? Think about it
-# the controller should probably also be able to unsubscribe a view when the view requests it. How would I implement it?
+# additionally have a .close() method? 
+# the controller should probably also be able to unsubscribe a view when the view requests it
 
 from .my_controller import MyController
 

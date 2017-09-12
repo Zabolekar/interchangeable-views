@@ -12,7 +12,6 @@ inc <- function() {
 class MyRModel(Model):
    _inform_about = ("n",)
    def __init__(self):
-      super().__init__()
       r(R_CODE)
 
    @property

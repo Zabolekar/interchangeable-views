@@ -22,8 +22,7 @@ def informs(f):
    def wrapper(self, *args, **kwargs):
       result = f(self, *args, **kwargs)
       data = self.current_data()
-      for view in self.observers:
-         view.inform(data)
+      self.controller.inform(data)
       return result
    return wrapper
 
@@ -34,15 +33,7 @@ class Model(metaclass=SingleInheritance): # TODO: why did I need it to be Single
    If you want to mutate it, it can be an instance attribute and a list of field names.
    Alternatively, you can override current_data, because it is the only method that uses _inform_about.
    2. Decorate with @informs any public method that changes your model or calls methods that change you model
-   3. Last but not least, don't forget to call super().__init__() somewhere in your model's __init__()
    """
-   def __init__(self):
-      self.observers = []
-   def subscribe(self, view):
-      print(f"subscribing {view.__class__.__name__} to the model")
-      self.observers.append(view)
-      data = self.current_data()
-      view.inform(data)
    def current_data(self):
       return {name: getattr(self, name) for name in self._inform_about}
 
@@ -56,9 +47,17 @@ class View(ABC):
 
 class Controller(ABC):
    def __init__(self, model_class):
-      self._model = model_class()
+      self.model = model_class()
+      self.model.controller = self
+      self.views = []
+   def inform(self, data):
+      for view in self.views:
+         view.inform(data)
    def model_subscribe(self, view):
-      self._model.subscribe(view)
+      print(f"subscribing {view.__class__.__name__} to the model")
+      self.views.append(view)
+      data = self.model.current_data()
+      view.inform(data)
    @abstractmethod
    def dispatch_event(self, event):
       pass
