@@ -1,5 +1,5 @@
 import curses
-from ..helpers.mvc import View
+from ..base_classes import View
 
 class CursesView(View):
    def __init__(self, dispatch_event):

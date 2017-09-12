@@ -1,6 +1,6 @@
 import sys
 from PySide.QtGui import QApplication, QPushButton, QTextDocument, QPixmap, QPainter, QColor
-from ..helpers.mvc import View
+from ..base_classes import View
 
 def button_set_HTML(button, html):
    doc = QTextDocument()

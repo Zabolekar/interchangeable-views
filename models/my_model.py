@@ -1,4 +1,4 @@
-from ..helpers.mvc import Model, informs
+from ..base_classes import Model, informs
 
 class MyModel(Model):
    _inform_about = ("n",)

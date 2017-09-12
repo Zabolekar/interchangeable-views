@@ -1,6 +1,6 @@
 from tkinter import Tk
 from tkinter import Button, Scale, Label
-from ..helpers.mvc import View
+from ..base_classes import View
 
 ARABIC = "٠١٢٣٤٥٦٧٨٩"
 DEVANAGARI = "०१२३४५६७८९"

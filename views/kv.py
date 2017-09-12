@@ -9,7 +9,7 @@ Config.set('graphics', 'height', '200')
 from kivy.app import App
 from kivy.uix.button import Button
 
-from ..helpers.mvc import View
+from ..base_classes import View
 
 class MyApp(App):
    def build(self):

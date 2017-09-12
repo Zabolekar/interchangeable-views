@@ -1,4 +1,4 @@
-from .helpers.mvc import Controller
+from .base_classes import Controller
 
 class MyController(Controller):
    def dispatch_event(self, event):

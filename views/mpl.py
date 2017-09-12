@@ -4,7 +4,7 @@ matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 import matplotlib.widgets as wid
 
-from ..helpers.mvc import View
+from ..base_classes import View
 
 class MatplotlibView(View):
    def __init__(self, dispatch_event):

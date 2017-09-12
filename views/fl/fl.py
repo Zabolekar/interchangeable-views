@@ -1,6 +1,6 @@
 from time import strftime
 from flask import Flask, render_template, Response
-from ...helpers.mvc import View
+from ...base_classes import View
 
 class FlaskView(View):
    def __init__(self, dispatch_event):

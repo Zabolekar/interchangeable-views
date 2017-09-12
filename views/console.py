@@ -1,5 +1,5 @@
 import colorama as cr
-from ..helpers.mvc import View
+from ..base_classes import View
 
 def bright(s):
    return cr.Style.BRIGHT + s + cr.Style.RESET_ALL
