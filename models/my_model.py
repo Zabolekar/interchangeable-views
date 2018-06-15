@@ -7,3 +7,4 @@ class MyModel(Model):
    @informs
    def inc(self):
       self.n += 1
+

@@ -21,7 +21,7 @@ class MatplotlibView(View):
       self.but = wid.Button(self.ax, "")
       self.but.on_clicked(lambda _: dispatch_event("increment"))
       plt.show(block=False)
-      self.figure.canvas.mpl_connect("close_event", lambda _: dispatch_event("quit"))
+      self.figure.canvas.mpl_connect("close_event", lambda _: dispatch_event(("unsubscribe", self)))
    def inform(self, model_data):
       n = model_data["n"]
       self.timestamps.append(monotonic())

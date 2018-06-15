@@ -34,7 +34,7 @@ class TkView(View):
       self.root.protocol("WM_DELETE_WINDOW", self.on_delete_window)
       
    def on_delete_window(self):
-      self.dispatch_event("quit")
+      self.dispatch_event(("unsubscribe", self))
       self.close()
       
    def close(self):
