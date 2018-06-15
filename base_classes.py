@@ -53,11 +53,15 @@ class Controller(ABC):
    def inform(self, data):
       for view in self.views:
          view.inform(data)
-   def model_subscribe(self, view):
+   def subscribe(self, view):
       print(f"subscribing {view.__class__.__name__} to the model")
       self.views.append(view)
       data = self.model.current_data()
       view.inform(data)
+   def unsubscribe(self, view):
+      for i, v in enumerate(self.views):
+         if v is view:
+            self.views.pop(i)
    @abstractmethod
    def dispatch_event(self, event):
       pass

@@ -16,10 +16,6 @@ from .views.console import ConsoleView
 # TODO: for whatever reason Tk and Kivy run fine together, Tk and Matplotlib do too, but all three together don't
 # TODO: for whatever reason matplotlib is unresponsive when called with qt-matplotlib
 # changind the backend to Qt4Agg doesn't fix it ("A QApplication instance already exists")
-# TODO: tk-matplotlib backends behaves really ugly if one of the windows has been closed
-# Solution: every view should send a "quit" message on being closed, controller should be able to handle it. So every view should
-# additionally have a .close() method? 
-# the controller should probably also be able to unsubscribe a view when the view requests it
 
 from .my_controller import MyController
 
@@ -66,19 +62,19 @@ if __name__ == '__main__':
       def kv():
          from .views.kv import KivyView
          kivy_view = KivyView(controller.dispatch_event)
-         controller.model_subscribe(kivy_view)
+         controller.subscribe(kivy_view)
          kivy_view.mainloop()
       Thread(target=kv, args=()).start()
    elif view_name == "tk-matplotlib":
       from .views.tk import TkView as MainView
       from .views.mpl import MatplotlibView
       mpl_view = MatplotlibView(controller.dispatch_event)
-      controller.model_subscribe(mpl_view)
+      controller.subscribe(mpl_view)
    elif view_name == "qt-matplotlib":
       from .views.qt import QtView as MainView
       from .views.mpl import MatplotlibView
       mpl_view = MatplotlibView(controller.dispatch_event)
-      controller.model_subscribe(mpl_view)
+      controller.subscribe(mpl_view)
    else:
       print(f"Unknown view: {view_name}")
       quit()
@@ -86,8 +82,8 @@ if __name__ == '__main__':
    if view_name not in ["console", "curses"]:
       # a console view without mainloop won't start a repl,
       # but still will print nicely colored values on change
-      controller.model_subscribe(ConsoleView(controller.dispatch_event))
+      controller.subscribe(ConsoleView(controller.dispatch_event))
 
    view = MainView(controller.dispatch_event)
-   controller.model_subscribe(view)
+   controller.subscribe(view)
    view.mainloop()
