@@ -40,7 +40,7 @@ if __name__ == '__main__':
       view_name = argv[2]
    except IndexError:
       print("You haven't selected any view")
-      print("Default is console. Others are: tk, kivy, matplotlib, curses, qt, flask, tk-kivy, tk-matplotlib, qt-matplotlib (experimental)")
+      print("Default is console. Others are: tk, kivy, matplotlib, curses, qt, flask, tk-kivy, tk-matplotlib, qt-matplotlib")
       view_name = "console"
 
    if view_name == "console":
@@ -73,7 +73,7 @@ if __name__ == '__main__':
    elif view_name == "qt-matplotlib":
       from .views.qt import QtView as MainView
       from .views.mpl import MatplotlibView
-      mpl_view = MatplotlibView(controller.dispatch_event)
+      mpl_view = MatplotlibView(controller.dispatch_event, backend="Qt4Agg")
       controller.subscribe(mpl_view)
    else:
       print(f"Unknown view: {view_name}")

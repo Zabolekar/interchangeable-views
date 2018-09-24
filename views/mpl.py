@@ -2,15 +2,17 @@ from time import monotonic
 
 import numpy as np
 import matplotlib
-matplotlib.use("TkAgg")
-import matplotlib.pyplot as plt
 import matplotlib.widgets as wid
 
 from ..base_classes import View
 
 class MatplotlibView(View):
-   def __init__(self, dispatch_event):
-      print("initializing MatplotlibView")
+   def __init__(self, dispatch_event, *, backend="TkAgg"):
+      print(f"initializing MatplotlibView with backend {backend}")
+      matplotlib.use(backend)
+      # can't be imported before specifying the backend:
+      global plt
+      import matplotlib.pyplot as plt
       self.figure = plt.figure()
       self.ax = self.figure.add_subplot(111)
       self.ax.set_xlabel("Time")

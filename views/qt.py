@@ -17,7 +17,13 @@ def button_set_HTML(button, html):
 class QtView(View):
    def __init__(self, dispatch_event):
       print("initializing QtView")
-      self.app = QApplication(sys.argv)
+      instance = QApplication.instance()
+      if instance is None:
+         print("creating a new QApplication instance")
+         self.app = QApplication(sys.argv)
+      else:
+         print("using an existing QApplication instance")
+         self.app = instance
       self.but = QPushButton()
       self.but.clicked.connect(lambda: dispatch_event("increment"))
       self.but.show()
