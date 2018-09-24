@@ -32,7 +32,7 @@ class Model(metaclass=SingleInheritance): # TODO: why did I need it to be Single
    1. Your model should have a class attribute _inform_about, which is a sequence (usually a tuple) of field names.
    If you want to mutate it, it can be an instance attribute and a list of field names.
    Alternatively, you can override current_data, because it is the only method that uses _inform_about.
-   2. Decorate with @informs any public method that changes your model or calls methods that change you model
+   2. Decorate with @informs any public method that changes your model
    """
    def current_data(self):
       return {name: getattr(self, name) for name in self._inform_about}
