@@ -16,6 +16,18 @@ from .views.console import ConsoleView
 
 from .my_controller import MyController
 
+def fl():
+   from .views.fl.fl import FlaskView
+   flask_view = FlaskView(controller.dispatch_event)
+   controller.subscribe(flask_view)
+   flask_view.mainloop()
+
+def kv():
+   from .views.kv import KivyView
+   kivy_view = KivyView(controller.dispatch_event)
+   controller.subscribe(kivy_view)
+   kivy_view.mainloop()
+
 if __name__ == '__main__':
    try:
       model_name = argv[1]
@@ -37,7 +49,8 @@ if __name__ == '__main__':
       view_name = argv[2]
    except IndexError:
       print("You haven't selected any view")
-      print("Default is console. Others are: tk, kivy, matplotlib, curses, qt, flask, tk-kivy, tk-matplotlib, qt-matplotlib, tk-flask")
+      print("Default is console. Others are: tk, kivy, matplotlib, curses, qt, flask, "\
+            "tk+kivy, qt+kivy, tk+matplotlib, qt+matplotlib, tk+flask, qt+flask, tk+qt")
       view_name = "console"
 
    if view_name == "console":
@@ -55,35 +68,36 @@ if __name__ == '__main__':
       from .views.fl.fl import FlaskView as MainView
    elif view_name == "matplotlib":
       from .views.mpl import MatplotlibView as MainView
-   elif view_name == "tk-kivy":
+   elif view_name == "tk+kivy":
       from .views.tk import TkView as MainView
-      def kv():
-         from .views.kv import KivyView
-         kivy_view = KivyView(controller.dispatch_event)
-         controller.subscribe(kivy_view)
-         kivy_view.mainloop()
       Thread(target=kv, args=()).start()
-   elif view_name == "tk-matplotlib":
+   elif view_name == "qt+kivy":
+      from .views.qt import QtView as MainView
+      Thread(target=kv, args=()).start()
+   elif view_name == "tk+matplotlib":
       from .views.tk import TkView as MainView
       from .views.mpl import MatplotlibView
       mpl_view = MatplotlibView(controller.dispatch_event)
       controller.subscribe(mpl_view)
-   elif view_name == "qt-matplotlib":
+   elif view_name == "qt+matplotlib":
       from .views.qt import QtView as MainView
       from .views.mpl import MatplotlibView
       mpl_view = MatplotlibView(controller.dispatch_event, backend="Qt4Agg")
       controller.subscribe(mpl_view)
-   elif view_name == "tk-flask":
+   elif view_name == "tk+flask":
       from .views.tk import TkView as MainView
-      def fl():
-         from .views.fl.fl import FlaskView
-         flask_view = FlaskView(controller.dispatch_event)
-         controller.subscribe(flask_view)
-         flask_view.mainloop()
       Thread(target=fl, args=()).start()
-      from .views.mpl import MatplotlibView
-      mpl_view = MatplotlibView(controller.dispatch_event, backend="Qt4Agg")
-      controller.subscribe(mpl_view)
+   elif view_name == "qt+flask":
+      from .views.qt import QtView as MainView
+      Thread(target=fl, args=()).start()
+   elif view_name == "tk+qt":
+      from .views.qt import QtView as MainView
+      def tk():
+         from .views.tk import TkView
+         tk_view = TkView(controller.dispatch_event)
+         controller.subscribe(tk_view)
+         tk_view.mainloop()
+      Thread(target=tk, args=()).start()
    else:
       print(f"Unknown view: {view_name}")
       quit()
