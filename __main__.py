@@ -14,8 +14,6 @@ from .views.console import ConsoleView
 # Qt doesn't work well when launched in a separate thread
 # but it also doesn't update without being clicked, which I also don't understand
 # TODO: for whatever reason Tk and Kivy run fine together, Tk and Matplotlib do too, but all three together don't
-# TODO: for whatever reason matplotlib is unresponsive when called with qt-matplotlib
-# changind the backend to Qt4Agg doesn't fix it ("A QApplication instance already exists")
 
 from .my_controller import MyController
 

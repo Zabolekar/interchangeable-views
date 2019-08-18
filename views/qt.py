@@ -1,5 +1,6 @@
 import sys
-from PySide.QtGui import QApplication, QPushButton, QTextDocument, QPixmap, QPainter, QColor
+from PySide2.QtWidgets import QApplication, QPushButton
+from PySide2.QtGui import QTextDocument, QPixmap, QPainter, QColor
 from ..base_classes import View
 
 def button_set_HTML(button, html):
