@@ -11,8 +11,8 @@ from .views.console import ConsoleView
 # it still somehow manages to block the program
 # TODO: for reasons I don't quite understand,
 # Qt doesn't work well when launched in a separate thread
-# but it also doesn't update without being clicked, which I also don't understand
-# TODO: for whatever reason Tk and Kivy run fine together, Tk and Matplotlib do too, but all three together don't
+# TODO: for whatever reason Tk and Kivy run fine together, Tk and Matplotlib do too, Tk and Flask do as well,
+# but Tk+Kivy+Matplotlib or Tk+Flask+Kivy or Tk+Flask+Matplotlib don't
 
 from .my_controller import MyController
 
@@ -37,7 +37,7 @@ if __name__ == '__main__':
       view_name = argv[2]
    except IndexError:
       print("You haven't selected any view")
-      print("Default is console. Others are: tk, kivy, matplotlib, curses, qt, flask, tk-kivy, tk-matplotlib, qt-matplotlib")
+      print("Default is console. Others are: tk, kivy, matplotlib, curses, qt, flask, tk-kivy, tk-matplotlib, qt-matplotlib, tk-flask")
       view_name = "console"
 
    if view_name == "console":
@@ -70,6 +70,17 @@ if __name__ == '__main__':
       controller.subscribe(mpl_view)
    elif view_name == "qt-matplotlib":
       from .views.qt import QtView as MainView
+      from .views.mpl import MatplotlibView
+      mpl_view = MatplotlibView(controller.dispatch_event, backend="Qt4Agg")
+      controller.subscribe(mpl_view)
+   elif view_name == "tk-flask":
+      from .views.tk import TkView as MainView
+      def fl():
+         from .views.fl.fl import FlaskView
+         flask_view = FlaskView(controller.dispatch_event)
+         controller.subscribe(flask_view)
+         flask_view.mainloop()
+      Thread(target=fl, args=()).start()
       from .views.mpl import MatplotlibView
       mpl_view = MatplotlibView(controller.dispatch_event, backend="Qt4Agg")
       controller.subscribe(mpl_view)
