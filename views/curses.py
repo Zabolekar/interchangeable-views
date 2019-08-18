@@ -1,8 +1,19 @@
+import sys
 import curses
 from ..base_classes import View
 
+class FileObjectDummy:
+   def write(self, text):
+      pass
+   def get_text(self, start, end):
+      return ""
+   def flush(self):
+      pass
+
 class CursesView(View):
    def __init__(self, dispatch_event):
+      sys.stdout = FileObjectDummy()
+      sys.stderr = FileObjectDummy()
       self.dispatch_event = dispatch_event
       self.win = None
       self.screen = None

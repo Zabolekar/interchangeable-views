@@ -7,7 +7,6 @@ from .views.console import ConsoleView
 # for example, importing kivy writes stuff to console even if you set log_level='critical'
 # and importing matplotlib takes some time
 
-# TODO: curses view really doesn't work well with R model
 # TODO: if Flask is being launched in a separate thread,
 # it still somehow manages to block the program
 # TODO: for reasons I don't quite understand,
@@ -44,6 +43,7 @@ if __name__ == '__main__':
    if view_name == "console":
       MainView = ConsoleView
    elif view_name == "curses":
+      # sadly, you won't be able to see the R output
       from .views.curses import CursesView as MainView
    elif view_name == "tk":
       from .views.tk import TkView as MainView
