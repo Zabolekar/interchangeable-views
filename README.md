@@ -1,3 +1,3 @@
-Three most important classes of this project are called `Model`, `View` and `Controller` and reside in a module called `mvc.py`. However, it doesn't necessarily imply that the project is an implementation of the MVC pattern now or will implement it in the future. The names, too, may change.
+A simple counter class with multiple interchangeable (and sometimes, although sadly not yet always, combinable) UIs and two interchangeable models.
 
-What it really is: a simple counter class with multiple interchangeable UIs.
+The most important three classes of this project are called `Model`, `View` and `Controller` and reside in a module called `mvc.py`. However, the project is rather an implementation of the MVP pattern (the kind with a Supervising Controller), not of the MVC pattern.
